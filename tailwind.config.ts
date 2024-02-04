@@ -19,8 +19,8 @@ const config = {
     },
     extend: {
       fontFamily: {
-        serif: ["var(--font-fraunces)", ...fontFamily.serif],
-        sans: ["var(--font-quicksand)", ...fontFamily.sans],
+        sans: ["var(--font-noto-sans-thai)", "var(--font-mitr)", ...fontFamily.sans],
+        serif: ["var(--font-mitr)", ...fontFamily.serif],
       },
       colors: {
         skin: {

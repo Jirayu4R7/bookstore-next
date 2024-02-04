@@ -1,0 +1,354 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "attributes": {
+        "title": "เสือสองทาง",
+        "price": 159.99,
+        "discount_percent": 12,
+        "description": "นิยายที่เล่าเรื่องราวของการเผชิญหน้ากับความยากลำบากในชีวิต",
+        "slug": "seu-sorng-taang",
+        "in_stock": true,
+        "publishedAt": "2023-03-10",
+        "cover": "https://example.com/seu-sorng-taang.jpg",
+        "author": {
+          "id": 201,
+          "attributes": {
+            "name": "สุภาพ บุญญานนท์"
+          }
+        },
+        "categories": [
+          {
+            "id": 301,
+            "attributes": {
+              "name": "นิยายวรรณกรรม",
+              "slug": "niyai-wan-kan-rom"
+            }
+          },
+          {
+            "id": 302,
+            "attributes": {
+              "name": "นิยายผจญภัย",
+              "slug": "niyai-phot-chan-pai"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "attributes": {
+        "title": "ทะเลสาบในตัวภูเขา",
+        "price": 119.99,
+        "discount_percent": 8,
+        "description": "นิยายที่เล่าเรื่องราวของการต่อสู้กับภัยพิบัติในสวรรค์แห่งธรรมชาติ",
+        "slug": "talay-saab-nai-dtua-phu-khao",
+        "in_stock": true,
+        "publishedAt": "2023-04-25",
+        "cover": "https://example.com/talay-saab-nai-dtua-phu-khao.jpg",
+        "author": {
+          "id": 202,
+          "attributes": {
+            "name": "พิทยา ศรีสุวรรณ"
+          }
+        },
+        "categories": [
+          {
+            "id": 302,
+            "attributes": {
+              "name": "นิยายผจญภัย",
+              "slug": "niyai-phot-chan-pai"
+            }
+          },
+          {
+            "id": 303,
+            "attributes": {
+              "name": "นิยายโรแมนติก",
+              "slug": "niyai-ro-maen-tik"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "attributes": {
+        "title": "เงาของลมหนาว",
+        "price": 99.99,
+        "discount_percent": 15,
+        "description": "นิยายที่เล่าเรื่องราวของความรักและความสูญเสียในยุคหลังสงครามโลกครั้งที่ 2",
+        "slug": "ngao-khong-lom-nao",
+        "in_stock": true,
+        "publishedAt": "2023-06-15",
+        "cover": "https://example.com/ngao-khong-lom-nao.jpg",
+        "author": {
+          "id": 203,
+          "attributes": {
+            "name": "วิลาสินี วงศ์เทพ"
+          }
+        },
+        "categories": [
+          {
+            "id": 303,
+            "attributes": {
+              "name": "นิยายโรแมนติก",
+              "slug": "niyai-ro-maen-tik"
+            }
+          },
+          {
+            "id": 304,
+            "attributes": {
+              "name": "นิยายสังคม",
+              "slug": "niyai-sang-khom"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "attributes": {
+        "title": "ทางใจที่ไม่ถูกต้อง",
+        "price": 129.99,
+        "discount_percent": 10,
+        "description": "นิยายที่เล่าเรื่องราวของการต่อสู้กับอุปสรรคทางจิตใจ",
+        "slug": "thang-jai-thi-mai-tuk-dtong",
+        "in_stock": true,
+        "publishedAt": "2023-08-05",
+        "cover": "https://example.com/thang-jai-thi-mai-tuk-dtong.jpg",
+        "author": {
+          "id": 204,
+          "attributes": {
+            "name": "สุรวีร์ วงศ์สิทธิ"
+          }
+        },
+        "categories": [
+          {
+            "id": 304,
+            "attributes": {
+              "name": "นิยายสังคม",
+              "slug": "niyai-sang-khom"
+            }
+          },
+          {
+            "id": 305,
+            "attributes": {
+              "name": "นิยายครอบครัว",
+              "slug": "niyai-khrop-khrua"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "attributes": {
+        "title": "ดอกไม้สีทอง",
+        "price": 149.99,
+        "discount_percent": 12,
+        "description": "นิยายที่เล่าเรื่องราวของความอยากรักและการต่อสู้กับปัญหาในครอบครัว",
+        "slug": "dok-mai-si-thong",
+        "in_stock": true,
+        "publishedAt": "2023-09-20",
+        "cover": "https://example.com/dok-mai-si-thong.jpg",
+        "author": {
+          "id": 205,
+          "attributes": {
+            "name": "ชญานิษฐ์ พรหมประเสริฐ"
+          }
+        },
+        "categories": [
+          {
+            "id": 305,
+            "attributes": {
+              "name": "นิยายครอบครัว",
+              "slug": "niyai-khrop-khrua"
+            }
+          },
+          {
+            "id": 306,
+            "attributes": {
+              "name": "นิยายสั้น",
+              "slug": "niyai-san"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "attributes": {
+        "title": "ฝากไว้ที่ริมทาง",
+        "price": 119.99,
+        "discount_percent": 8,
+        "description": "นิยายที่เล่าเรื่องราวของการมีความสุขในเรื่องเล็ก ๆ ที่รอบตัว",
+        "slug": "fak-wai-dtai-rim-taang",
+        "in_stock": true,
+        "publishedAt": "2023-11-10",
+        "cover": "https://example.com/fak-wai-dtai-rim-taang.jpg",
+        "author": {
+          "id": 206,
+          "attributes": {
+            "name": "ภาณุมาศ ศิริวัชร์"
+          }
+        },
+        "categories": [
+          {
+            "id": 306,
+            "attributes": {
+              "name": "นิยายสั้น",
+              "slug": "niyai-san"
+            }
+          },
+          {
+            "id": 307,
+            "attributes": {
+              "name": "นิยายชีวิต",
+              "slug": "niyai-chee-wit"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "attributes": {
+        "title": "เมืองแสนดี",
+        "price": 139.99,
+        "discount_percent": 10,
+        "description": "นิยายที่เล่าเรื่องราวของการพบเจอความสุขในทุกช่วงเวลา",
+        "slug": "meuang-saen-dee",
+        "in_stock": true,
+        "publishedAt": "2023-12-25",
+        "cover": "https://example.com/meuang-saen-dee.jpg",
+        "author": {
+          "id": 207,
+          "attributes": {
+            "name": "ศิวกร ชุติวัฒน์"
+          }
+        },
+        "categories": [
+          {
+            "id": 307,
+            "attributes": {
+              "name": "นิยายชีวิต",
+              "slug": "niyai-chee-wit"
+            }
+          },
+          {
+            "id": 308,
+            "attributes": {
+              "name": "นิยายความรัก",
+              "slug": "niyai-khwaam-rak"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "attributes": {
+        "title": "หัวใจหล่อเลี้ยง",
+        "price": 109.99,
+        "discount_percent": 15,
+        "description": "นิยายที่เล่าเรื่องราวของความรักและการต่อสู้กับอุปสรรคในการเลี้ยงลูก",
+        "slug": "hua-jai-lor-liang",
+        "in_stock": true,
+        "publishedAt": "2024-01-15",
+        "cover": "https://example.com/hua-jai-lor-liang.jpg",
+        "author": {
+          "id": 208,
+          "attributes": {
+            "name": "ณัฐชนน สุนทรวัฒน์"
+          }
+        },
+        "categories": [
+          {
+            "id": 308,
+            "attributes": {
+              "name": "นิยายความรัก",
+              "slug": "niyai-khwaam-rak"
+            }
+          },
+          {
+            "id": 309,
+            "attributes": {
+              "name": "นิยายสืบสวน",
+              "slug": "niyai-seub-sawan"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "attributes": {
+        "title": "ภูเขาสีรุ้ง",
+        "price": 169.99,
+        "discount_percent": 12,
+        "description": "นิยายที่เล่าเรื่องราวของความมุ่งมั่นและการเปลี่ยนแปลงในชีวิต",
+        "slug": "phu-khao-si-rung",
+        "in_stock": true,
+        "publishedAt": "2024-02-20",
+        "cover": "https://example.com/phu-khao-si-rung.jpg",
+        "author": {
+          "id": 209,
+          "attributes": {
+            "name": "อรพรรณ จันทร์เจริญ"
+          }
+        },
+        "categories": [
+          {
+            "id": 309,
+            "attributes": {
+              "name": "นิยายสืบสวน",
+              "slug": "niyai-seub-sawan"
+            }
+          },
+          {
+            "id": 310,
+            "attributes": {
+              "name": "นิยายด้านวิทยาศาสตร์",
+              "slug": "niyai-dan-wit-thay-sat"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "attributes": {
+        "title": "สายฝนที่ไม่หยุด",
+        "price": 119.99,
+        "discount_percent": 8,
+        "description": "นิยายที่เล่าเรื่องราวของความหวังและการต่อสู้กับภัยพิบัติ",
+        "slug": "sai-fon-thi-mai-yut",
+        "in_stock": true,
+        "publishedAt": "2024-03-30",
+        "cover": "https://example.com/sai-fon-thi-mai-yut.jpg",
+        "author": {
+          "id": 210,
+          "attributes": {
+            "name": "วิทยา สุขสันต์"
+          }
+        },
+        "categories": [
+          {
+            "id": 310,
+            "attributes": {
+              "name": "นิยายด้านวิทยาศาสตร์",
+              "slug": "niyai-dan-wit-thay-sat"
+            }
+          },
+          {
+            "id": 311,
+            "attributes": {
+              "name": "นิยายสำหรับเยาวชน",
+              "slug": "niyai-sam-rap-yao-wachon"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

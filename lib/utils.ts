@@ -19,3 +19,8 @@ export const generateUniqueArray = (num: number) => {
 
   return Array.from(numbers);
 };
+
+import defaultBookCover from "@/public/images/default_book_cover.jpeg";
+export const generateCoverDefault = () => {
+  return defaultBookCover;
+};

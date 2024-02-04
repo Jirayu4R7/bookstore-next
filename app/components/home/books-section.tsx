@@ -1,13 +1,15 @@
 import Link from "next/link";
 import CaretDownIcon from "../icons/CaretDownIcon";
 import BookRow from "../book-row";
+import { getBooksMock } from "@/lib/store/server/books/queries";
 
-const BooksSection = () => {
+const BooksSection = async () => {
+  const bookMock = await getBooksMock();
   const data = [
     {
       name: "New Arrivals",
       slug: "new-arrivals",
-      books: [],
+      books: bookMock,
     },
     {
       name: "Best Seller",

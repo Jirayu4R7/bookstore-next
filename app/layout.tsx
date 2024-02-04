@@ -1,10 +1,21 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Noto_Sans_Thai, Mitr } from "next/font/google";
 import "./globals.css";
 import Footer from "@/app/components/footer";
 import NavBar from "@/app/components/navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+const notoSansThai = Noto_Sans_Thai({
+  variable: "--font-noto-sans-thai",
+  subsets: ["thai"],
+  display: "swap",
+});
+
+const mitr = Mitr({
+  variable: "--font-mitr",
+  subsets: ["thai"],
+  display: "swap",
+  weight: ["200", "300", "400", "500", "600", "700"]
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${notoSansThai.variable} ${mitr.variable}`}>
         <div className="flex min-h-screen flex-col">
           <NavBar />
           {children}

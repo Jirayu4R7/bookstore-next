@@ -16,7 +16,7 @@ const HeroSection = () => {
         />
       </div>
       <div className="info-wrapper flex flex-1 flex-col gap-y-4 md:justify-center lg:justify-end lg:gap-y-8">
-        <h1 className="font-serif text-4xl font-semibold md:!leading-tight lg:text-5xl xl:text-6xl">
+        <h1 className="font-serif text-3xl font-semibold md:!leading-tight lg:text-4xl xl:text-5xl">
           Best Place to Find <br />
           Your Favourite <br />
           Books.

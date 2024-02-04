@@ -2,15 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* body {
-  @apply bg-skin-base text-skin-dark;
-} */
-
 @layer base {
   /* 180, 100%, 99% */
   /*  0 0% 100% */
   :root {
-    --background: 180 100% 99%; 
+    --background: 180 100% 99%;
     --foreground: 20 14.3% 4.1%;
 
     --card: 0 0% 100%;
@@ -72,7 +68,7 @@
   }
 
   body {
-    background-color: --background;
+    @apply bg-skin-base text-skin-dark font-sans;
   }
 }
 
