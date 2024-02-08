@@ -1,39 +1,37 @@
 import Link from "next/link";
-import CaretDownIcon from "../icons/CaretDownIcon";
+import CaretDownIcon from "@/app/components/icons/CaretDownIcon";
 import BookRow from "../book-row";
-import { getBooksMock } from "@/lib/store/server/books/queries";
+import { fetchBooksByCategory } from "@/lib/store/server/books/queries";
+import { fetchCategories } from "@/lib/store/server/categories/queries";
 
 const BooksSection = async () => {
-  const bookMock = await getBooksMock();
-  const data = [
-    {
-      name: "New Arrivals",
-      slug: "new-arrivals",
-      books: bookMock,
-    },
-    {
-      name: "Best Seller",
-      slug: "best-seller",
-      books: [],
-    },
-  ];
+  const page = 1;
+  const categories = await fetchCategories({ page });
+
   return (
     <div id="books" className="py-14">
-      {data.map(({ name, slug, books }) => (
-        <section key={slug} className="mx-auto max-w-6xl px-4 py-6 md:px-8">
-          <div className="flex items-baseline justify-between">
-            <h2 className="font-serif text-2xl font-medium capitalize md:text-2xl">
-              {name}
-            </h2>
-            <SeeAll href={`/categories/${slug}`} />
-          </div>{" "}
-          <BookRow slug={slug} books={books} />
-          {/* <p>BookRow</p> */}
-          <div className="mt-8 flex items-center justify-center md:hidden">
-            <SeeAll href={`/categories/${slug}`} bottom />
-          </div>
-        </section>
-      ))}
+      {await Promise.all(
+        categories.map(async ({ title, slug }) => {
+          const books = await fetchBooksByCategory({
+            page: 1,
+            categorySlug: slug,
+          });
+          return (
+            <section key={slug} className="mx-auto max-w-6xl px-4 py-6 md:px-8">
+              <div className="flex items-baseline justify-between">
+                <h2 className="font-serif text-2xl font-medium capitalize md:text-2xl">
+                  {title}
+                </h2>
+                <SeeAll href={`/categories/${slug}`} />
+              </div>{" "}
+              <BookRow slug={slug} books={books ?? []} />
+              <div className="mt-8 flex items-center justify-center md:hidden">
+                <SeeAll href={`/categories/${slug}`} bottom />
+              </div>
+            </section>
+          );
+        })
+      )}
     </div>
   );
 };
@@ -43,7 +41,7 @@ type SeeAllType = {
   bottom?: boolean;
 };
 
-const SeeAll = ({ href, bottom = false }: SeeAllType) => (
+export const SeeAll = ({ href, bottom = false }: SeeAllType) => (
   <Link
     href={href}
     className={`${

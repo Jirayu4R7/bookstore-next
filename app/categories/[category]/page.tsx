@@ -1,4 +1,3 @@
-import { getBooksByCategoryMock } from "@/lib/store/server/books/queries";
 import BooksContainer from "./book-container";
 import Breadcrumb from "@/app/components/breadcrumb";
 
@@ -9,7 +8,7 @@ type Props = {
 
 export default async function Page({ params, searchParams }: Props) {
   const { category } = params;
-  const books = await getBooksByCategoryMock(category);
+
   return (
     <main className="main-container">
       <Breadcrumb />
