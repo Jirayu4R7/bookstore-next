@@ -1,7 +1,7 @@
 "use server";
 import { createClient } from "@/lib/supabase/server";
 import { cookies } from "next/headers";
-import { Book, BookQueryProps, Books } from "./types";
+// import { Book, BookQueryProps, Books } from "./types";
 import books from "@/lib/data/dum-books.json";
 import { PAGE_SIZE } from "@/lib/constants";
 

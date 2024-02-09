@@ -1,3 +1,4 @@
+// import { genPageMetadata } from "@/app/seo";
 import BooksContainer from "./book-container";
 import Breadcrumb from "@/app/components/breadcrumb";
 
@@ -5,6 +6,25 @@ type Props = {
   params: { category: string };
   searchParams: { page: number };
 };
+
+type MetaProps = {
+  params: { category: string };
+};
+
+// export const metadata = genPageMetadata({ title: "Categories" });
+
+export async function generateMetadata({ params }: MetaProps) {
+  // const bookData = await getCategoryBySlug(params.category)
+  const title = params?.category;
+  return {
+    title,
+    openGraph: {
+      title,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/categories/${params.category}`,
+    },
+    twitter: { title },
+  };
+}
 
 export default async function Page({ params, searchParams }: Props) {
   const { category } = params;

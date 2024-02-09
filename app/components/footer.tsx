@@ -8,18 +8,27 @@ const Footer = () => {
           </h2>
           <div className="text-sm">
             <p className="my-1">
-              We are an online bookstore that offers a wide selection of books
-              in various genres, including fiction, non-fiction, biographies,
-              and more.
-            </p>
-            <p>
-              We provide a convenient and enjoyable shopping experience while
-              offering competitive prices and excellent customer service.
+              The world is at your fingertips. Discover endless stories with
+              Kong Dong, your reading companion.
             </p>
           </div>
         </div>
-        <div></div>
-        <div></div>
+        <div className="about-us md:row-span-4">
+          <h2 className="my-1 font-serif text-xl font-semibold">Contact</h2>
+          <p className="mb-3 text-sm">
+            Email:{" "}
+            <a href="mailto:info@book.com" className="text-link mt-1 block">
+              info@book.com
+            </a>
+          </p>
+          <p className="mb-3 text-sm">
+            Phone:{" "}
+            <a href="tel:" className="text-link mt-1 block">
+              +669 999-999-99
+            </a>
+          </p>
+        </div>
+        <div className="social-group col-span-2 md:row-span-1 md:self-center"></div>
       </div>
     </footer>
   );

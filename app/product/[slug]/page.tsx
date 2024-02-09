@@ -6,6 +6,22 @@ type Props = {
   searchParams: { page: number };
 };
 
+type MetaProps = {
+  params: { slug: string };
+};
+
+export async function generateMetadata({ params }: MetaProps) {
+  const title = params?.slug;
+  return {
+    title,
+    openGraph: {
+      title,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/product/${params.slug}`,
+    },
+    twitter: { title },
+  };
+}
+
 export default function Page({ params, searchParams }: Props) {
   const { slug } = params;
   return (

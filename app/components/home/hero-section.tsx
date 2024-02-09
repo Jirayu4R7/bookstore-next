@@ -17,14 +17,14 @@ const HeroSection = () => {
       </div>
       <div className="info-wrapper flex flex-1 flex-col gap-y-4 md:justify-center lg:justify-end lg:gap-y-8">
         <h1 className="font-serif text-3xl font-semibold md:!leading-tight lg:text-4xl xl:text-5xl">
-          Best Place to Find <br />
-          Your Favourite <br />
-          Books.
+          Discover your next <br />
+          favorite book at
+          <br />
+          Kong Dong.
         </h1>
         <p className="font-sans xl:text-lg">
-          Unleash your imagination with our online bookstore! Discover a vast
-          selection of books for all ages and interests, with something for
-          everyone. Shop now and find your next favorite read!
+          More than a bookstore, Kong Dong is a space for learning, sharing, and
+          igniting your imagination.
         </p>
         <div>
           <a
