@@ -91,3 +91,21 @@ export async function fetchBook(slug: string) {
     return null;
   }
 }
+
+export async function searchBooks(keyword: string) {
+  const supabase = createServerSupabaseClient();
+  try {
+    let { data: books, error } = await supabase
+      .from("book")
+      .select("*, author(id, name),categories(id, title, slug)")
+      .like("title", `%${keyword}%`)
+      .limit(10);
+    if (error) {
+      console.log("error fetchbooks : ", error.message);
+      return null;
+    }
+    return books;
+  } catch (error) {
+    return null;
+  }
+}

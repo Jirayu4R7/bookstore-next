@@ -24,3 +24,9 @@ import defaultBookCover from "@/public/images/default_book_cover.jpeg";
 export const generateCoverDefault = () => {
   return defaultBookCover;
 };
+
+export function calPriceDiscount(price: number, discount: number): string {
+  // ราคาเต็ม x (100-จำนวนที่ลด) / 100
+  const priceDiscount = (price * (100 - discount)) / 100;
+  return priceDiscount.toFixed(2).toLocaleString();
+}

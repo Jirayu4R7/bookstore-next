@@ -1,4 +1,4 @@
-import { cn, generateCoverDefault } from "@/lib/utils";
+import { calPriceDiscount, cn, generateCoverDefault } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import HeartIcon from "./icons/HeartIcon";
@@ -88,11 +88,5 @@ const ItemCard = ({ className = "", data }: Props) => {
     </article>
   );
 };
-
-function calPriceDiscount(price: number, discount: number): string {
-  // ราคาเต็ม x (100-จำนวนที่ลด) / 100
-  const priceDiscount = (price * (100 - discount)) / 100;
-  return priceDiscount.toFixed(2).toLocaleString();
-}
 
 export default ItemCard;
