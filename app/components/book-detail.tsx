@@ -1,5 +1,5 @@
-import { getBookBySlugMock, fetchBook } from "@/lib/store/server/books/queries";
-import { generateCoverDefault } from "@/lib/utils";
+import { fetchBook } from "@/lib/store/server/books/queries";
+import { calPriceDiscount, generateCoverDefault } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import HeartIcon from "./icons/HeartIcon";
@@ -34,18 +34,35 @@ export default async function BookDetails({ slug }: Props) {
             (min-width: 640px) 35vw,
             64vw"
             alt={book.title}
-            className="w-auto h-auto object-cover transition-all aspect-[5/8]"
+            className="aspect-[5/8] h-auto w-auto object-cover transition-all"
           />
         </div>
       </div>
       <div className="md:w-3/5">
-        <h1 className="text-xl font-bold md:text-2xl mb-2">{book.title}</h1>
+        <h1 className="mb-2 text-xl font-bold md:text-2xl">{book.title}</h1>
         <p className="text-base">{book.description}</p>
         <hr className="my-4 md:my-6" />
         <div className="grid grid-cols-2 gap-y-2 md:grid-cols-3 md:gap-y-4 lg:grid-cols-4">
           <div>Author :</div>
           <div className="md:col-span-2 lg:col-span-3">
             {book.author?.name ?? "-"}
+          </div>
+          <div>Price :</div>
+          <div className="md:col-span-2 lg:col-span-3">
+            <div className="flex flex-col items-baseline gap-1 md:flex-row">
+              {book.discount_percent > 0 && (
+                <div className="price pr-2 text-sm text-gray-600 line-through">
+                  <span>{book.price.toLocaleString()}</span>
+                  <span> บาท</span>
+                </div>
+              )}
+              <div className="price-discount mb-1 font-medium">
+                <span>
+                  {calPriceDiscount(book.price, book.discount_percent)}
+                </span>
+                <span> บาท </span>
+              </div>
+            </div>
           </div>
           <div>Categories :</div>
           <div className="md:col-span-2 lg:col-span-3">
@@ -72,6 +89,7 @@ export default async function BookDetails({ slug }: Props) {
           </Link>
 
           <button
+            disabled
             type="button"
             className="outline-btn-color flex w-full items-center justify-center gap-x-4 rounded border-2 py-2 text-center text-lg font-medium"
           >

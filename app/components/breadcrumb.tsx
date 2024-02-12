@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const Breadcrumb = () => {
+const Breadcrumb = ({ customTitle }: { customTitle?: string }) => {
   const pathName = usePathname();
   const breadcrumbList = pathName?.split("/").filter((n) => n) || [];
 
@@ -20,9 +20,9 @@ const Breadcrumb = () => {
             <li
               key={breadcrumb}
               aria-current="page"
-              className="capitalize opacity-100"
+              className="line-clamp-1 flex-wrap capitalize opacity-100"
             >
-              {breadcrumb}
+              {customTitle ? customTitle : breadcrumb}
             </li>
           ) : (
             <li

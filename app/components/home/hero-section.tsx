@@ -1,7 +1,6 @@
-import SearchIcon from "../icons/SearchIcon";
 import Image from "next/image";
-import cafeBookPic from "@/public/images/cafe-book.webp";
 import bookPic from "@/public/images/book.png";
+import CaretDownIcon from "../icons/CaretDownIcon";
 
 const HeroSection = () => {
   return (
@@ -29,10 +28,10 @@ const HeroSection = () => {
         <div>
           <a
             href="#books"
-            className="outline-btn-color inline-block rounded py-2 px-4 text-lg font-semibold"
+            className="outline-btn-color inline-block rounded px-4 py-2 text-lg font-semibold"
           >
             Browse
-            <SearchIcon className="ml-2 !stroke-skin-dark stroke-2" />
+            <CaretDownIcon className="ml-2 !stroke-skin-dark stroke-2" />
           </a>
         </div>
       </div>

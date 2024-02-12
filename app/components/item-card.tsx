@@ -23,7 +23,7 @@ const ItemCard = ({ className = "", data }: Props) => {
       )}
     >
       <Link
-        href={`/product/${data?.slug}`}
+        href={`/product/${data?.slug}?title=${data?.title}`}
         title={data?.title}
         className="image-wrapper rounded border-2 border-skin-muted bg-skin-muted p-4 sm:p-8 md:p-4"
       >
@@ -37,18 +37,18 @@ const ItemCard = ({ className = "", data }: Props) => {
             (min-width: 768px) 30vw,
             (min-width: 640px) 35vw,
             64vw"
-            className="h-auto w-auto object-cover transition-all aspect-[3/4]"
+            className="aspect-[3/4] h-auto w-auto object-cover transition-all"
           />
         </div>
       </Link>
-      <div className="content px-4 pb-4 flex flex-col  h-full">
+      <div className="content flex h-full flex-col px-4 pb-4">
         <header className="pb-1">
-          <h2 className="text-base line-clamp-2 leading-5">{data?.title}</h2>
-          {/* <p className="text-primary text-sm mt-1">{author_name}</p> */}
+          <h2 className="line-clamp-2 text-base leading-5">{data?.title}</h2>
+          {/* <p className="mt-1 text-sm text-primary">{author_name}</p> */}
         </header>
-        <div className="flex md:flex-row flex-col gap-1 items-baseline mt-auto">
+        <div className="mt-auto flex flex-col items-baseline gap-1 md:flex-row">
           {data?.discount_percent > 0 && (
-            <div className="price text-sm line-through text-gray-600 -mb-2">
+            <div className="price -mb-2 text-sm text-gray-600 line-through">
               <span>{data?.price.toLocaleString()}</span>
               <span> บาท</span>
             </div>

@@ -5,6 +5,17 @@ import { cookies } from "next/headers";
 import books from "@/lib/data/dum-books.json";
 import { PAGE_SIZE } from "@/lib/constants";
 
+export interface GetResponseBooks {
+  data: any[];
+  count: number;
+}
+
+export interface BookQueryProps {
+  limit?: number;
+  pageNum?: number;
+  searchTerm?: string;
+}
+
 export const createServerSupabaseClient = () => {
   const cookieStore = cookies();
   return createClient(cookieStore);
@@ -40,7 +51,6 @@ export async function fetchBooksByCategory({
   categorySlug?: string;
 }) {
   const supabase = createServerSupabaseClient();
-  // console.log("categorySlug: ", categorySlug);
   try {
     let { data: books, error } = await supabase
       .from("book")
@@ -57,20 +67,35 @@ export async function fetchBooksByCategory({
   }
 }
 
-export async function fetchBooks(page = 1) {
+export async function fetchBooks({
+  limit = 10,
+  pageNum = 1,
+  searchTerm,
+}: BookQueryProps): Promise<GetResponseBooks> {
   const supabase = createServerSupabaseClient();
   try {
+    const offset = (pageNum - 1) * limit;
+    const { count } = await supabase
+      .from("book")
+      .select("*", { count: "exact" })
+      .ilike("title", `%${searchTerm}%`);
+
     let { data: books, error } = await supabase
       .from("book")
-      .select("*, author(id, name),categories(title, slug)")
-      .range((page - 1) * PAGE_SIZE, page * PAGE_SIZE - 1);
+      .select("*, author(id, name),categories(id, title, slug)")
+      .ilike("title", `%${searchTerm}%`)
+      .range(offset, offset + limit - 1);
     if (error) {
       console.log("error fetchbooks : ", error.message);
-      return [];
+      throw new Error("Error fetching books");
     }
-    return books;
+    if (books) {
+      return { data: books, count: count || 0 };
+    } else {
+      return { data: [], count: count || 0 };
+    }
   } catch (error) {
-    return [];
+    return { data: [], count: 0 };
   }
 }
 
@@ -98,7 +123,7 @@ export async function searchBooks(keyword: string) {
     let { data: books, error } = await supabase
       .from("book")
       .select("*, author(id, name),categories(id, title, slug)")
-      .like("title", `%${keyword}%`)
+      .ilike("title", `%${keyword}%`)
       .limit(10);
     if (error) {
       console.log("error fetchbooks : ", error.message);

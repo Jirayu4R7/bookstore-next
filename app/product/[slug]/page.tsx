@@ -1,9 +1,9 @@
 import BookDetails from "@/app/components/book-detail";
-// import Breadcrumb from "@/app/components/breadcrumb";
+import Breadcrumb from "@/app/components/breadcrumb";
 
 type Props = {
   params: { slug: string };
-  searchParams: { page: number };
+  searchParams: { title: string };
 };
 
 type MetaProps = {
@@ -24,9 +24,10 @@ export async function generateMetadata({ params }: MetaProps) {
 
 export default function Page({ params, searchParams }: Props) {
   const { slug } = params;
+  const title = searchParams?.title || slug;
   return (
     <main className="main-container">
-      {/* <Breadcrumb /> */}
+      <Breadcrumb customTitle={title} />
       <BookDetails slug={slug} />
     </main>
   );
