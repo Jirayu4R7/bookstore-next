@@ -3,6 +3,8 @@ import { calPriceDiscount, generateCoverDefault } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import HeartIcon from "./icons/HeartIcon";
+import NotFoundBook from "./not-found-book";
+
 type Props = {
   slug: string;
 };
@@ -11,11 +13,11 @@ export default async function BookDetails({ slug }: Props) {
   // const data = await getBookBySlugMock(slug);
   const data = await fetchBook(slug);
   if (!data) {
-    console.log(data);
     return (
-      <div>
-        <p>Not found</p>
-      </div>
+      <NotFoundBook />
+      // <div>
+      //   <p>Not found</p>
+      // </div>
     );
   }
   const book = data;
