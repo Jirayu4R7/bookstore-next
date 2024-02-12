@@ -37,7 +37,7 @@ const NavBar = () => {
       <header className={cn("sticky top-0 z-20 bg-skin-base", navClassList)}>
         <NavigationMenu.Root
           aria-label="primary"
-          className=" main-navigation padding-x max-width relative m-auto flex max-w-6xl items-center justify-between py-4"
+          className="main-navigation padding-x max-width relative m-auto flex max-w-6xl items-center justify-between py-4"
         >
           <div className="flex basis-1/3 justify-start md:hidden">
             <button
@@ -55,7 +55,7 @@ const NavBar = () => {
           <div className="flex basis-1/3 justify-center md:justify-start">
             <AppLogo />
           </div>
-          <div className="flex basis-1/3 justify-end ">
+          <div className="flex basis-1/3 justify-end">
             <NavigationMenu.List className="gap-x-2 text-lg md:gap-x-4">
               <NavigationMenu.Item className="nav-menu">
                 <SearchDialog />
@@ -87,20 +87,32 @@ const NavBar = () => {
             <CancelIcon className="scale-125" />
           </button>
           <div className="flex flex-col items-center gap-2">
-            <p className="font-serif text-2xl font-medium">Next Book Store</p>
+            <p className="font-serif text-2xl font-medium">Book Store</p>
+            <p className="text-center opacity-90">
+              Discover your next favorite book <br /> at <span className="font-semibold">Kong Dong.</span>
+            </p>
           </div>
           <NavigationMenu.Root
             orientation="vertical"
-            className="mt-4 mb-6 self-stretch"
+            className="mb-6 mt-4 self-stretch"
           >
-            <NavigationMenu.List className="flex flex-col items-start gap-x-2 divide-y text-xl md:gap-x-4">
+            <NavigationMenu.List className="flex flex-col items-start gap-x-2 gap-y-1 divide-y text-xl md:gap-x-4">
               <NavigationMenu.Item className={`flex w-full flex-col`}>
                 <Link
                   href="/"
-                  className={`flex items-center gap-x-2 py-1 px-2 text-xl`}
+                  className={`flex items-center gap-x-2 px-2 py-1 text-xl`}
                   onClick={closeNav}
                 >
                   <span>Home</span>
+                </Link>
+              </NavigationMenu.Item>
+              <NavigationMenu.Item className={`flex w-full flex-col`}>
+                <Link
+                  href="/product"
+                  className={`flex items-center gap-x-2 px-2 py-1 text-xl`}
+                  onClick={closeNav}
+                >
+                  <span>Books</span>
                 </Link>
               </NavigationMenu.Item>
             </NavigationMenu.List>
