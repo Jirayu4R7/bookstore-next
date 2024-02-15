@@ -24,7 +24,12 @@ const config = {
       },
       colors: {
         skin: {
-          accent: { DEFAULT: "#53CAB5", dark: "#3CAF9A" },
+          accent: { 
+            // DEFAULT: "#FFBD99", 
+            // dark: "#805C50",   
+            DEFAULT: "#CBDCE3", 
+            dark: "#4A5568" 
+          },
           base: "#F9FFFF",
           muted: "#EDF4F4",
           dark: "#363636",
