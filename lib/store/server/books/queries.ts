@@ -4,9 +4,10 @@ import { cookies } from "next/headers";
 // import { Book, BookQueryProps, Books } from "./types";
 import books from "@/lib/data/dum-books.json";
 import { PAGE_SIZE } from "@/lib/constants";
+import { Book } from "@/lib/types";
 
 export interface GetResponseBooks {
-  data: any[];
+  data: Book[];
   count: number;
 }
 

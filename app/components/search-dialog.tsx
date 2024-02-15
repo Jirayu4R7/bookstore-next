@@ -11,13 +11,14 @@ import {
 } from "@/app/components/ui/dialog";
 import Link from "next/link";
 import Image from "next/image";
-import { calPriceDiscount, cn } from "@/lib/utils";
+import { calPriceDiscount, cn, generateCoverDefault } from "@/lib/utils";
 import { DialogProps } from "@radix-ui/react-dialog";
+import { Book } from "@/lib/types";
 
 const SearchDialog = ({ ...props }: DialogProps) => {
   const [open, setOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [result, setResult] = useState<any | null>(null);
+  const [result, setResult] = useState<Book[] | null>(null);
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useDebounce(
     searchTerm,
     500
@@ -25,13 +26,13 @@ const SearchDialog = ({ ...props }: DialogProps) => {
 
   useEffect(() => {
     if (debouncedSearchTerm.length > 2) {
-      searchBooks(debouncedSearchTerm).then((data) => {
-        setResult({ data: data });
+      searchBooks(debouncedSearchTerm).then((books) => {
+        setResult(books);
       });
     } else {
       if (debouncedSearchTerm === "") {
-        searchBooks("").then((data) => {
-          setResult({ data: data });
+        searchBooks("").then((books) => {
+          setResult(books);
         });
       }
     }
@@ -108,7 +109,7 @@ const SearchDialog = ({ ...props }: DialogProps) => {
             </DialogClose>
           </label>
         </div>
-        {result && result.data.length < 1 ? (
+        {result && result?.length < 1 ? (
           <div
             className={`flex h-24 items-center justify-center rounded bg-skin-base p-2`}
           >
@@ -122,11 +123,11 @@ const SearchDialog = ({ ...props }: DialogProps) => {
             className={cn(
               "max-h-[356px] h-[348px] rounded bg-skin-base p-2",
               result ? "block" : "hidden",
-              result?.data.length > 1 ? "h-[348px]" : "h-fit"
+              result ? "h-[348px]" : "h-fit"
             )}
           >
             <ul className="h-full divide-y overflow-y-auto">
-              {result?.data.map((book: any) => {
+              {result?.map((book: Book) => {
                 const {
                   slug,
                   price,
@@ -136,6 +137,14 @@ const SearchDialog = ({ ...props }: DialogProps) => {
                   id,
                   discount_percent,
                 } = book;
+
+                const coverSrc = cover ?? generateCoverDefault();
+                const discountedPrice = calPriceDiscount(
+                  price,
+                  discount_percent
+                );
+                const authorName = author?.name || "-";
+
                 return (
                   <li key={id}>
                     <Link
@@ -145,14 +154,10 @@ const SearchDialog = ({ ...props }: DialogProps) => {
                     >
                       <div className="relative h-36 w-28 overflow-hidden">
                         <Image
-                          src={cover}
+                          src={coverSrc}
                           alt={title}
                           fill
-                          sizes="
-                                  (min-width: 1024px) 20vw,
-                                  (min-width: 768px) 25vw,
-                                  (min-width: 640px) 33vw,
-                                  50vw"
+                          sizes="(min-width: 1024px) 20vw, (min-width: 768px) 25vw, (min-width: 640px) 33vw, 50vw"
                           className="object-contain"
                         />
                       </div>
@@ -160,13 +165,9 @@ const SearchDialog = ({ ...props }: DialogProps) => {
                         <div className="line-clamp-2 h-5 text-ellipsis">
                           {title}
                         </div>
-                        {author ? (
-                          <div className="text-sm italic opacity-75">
-                            By {author?.name}
-                          </div>
-                        ) : (
-                          <div className="text-sm italic opacity-75">-</div>
-                        )}
+                        <div className="text-sm italic opacity-75">
+                          By {authorName}
+                        </div>
                         <div className="flex flex-col items-baseline gap-1 md:flex-row">
                           {discount_percent > 0 && (
                             <div className="price -mb-2 text-sm text-gray-600 line-through">
@@ -175,9 +176,7 @@ const SearchDialog = ({ ...props }: DialogProps) => {
                             </div>
                           )}
                           <div className="price-discount mb-1 font-medium">
-                            <span>
-                              {calPriceDiscount(price, discount_percent)}
-                            </span>
+                            <span>{discountedPrice}</span>
                             <span> บาท </span>
                           </div>
                         </div>

@@ -2,16 +2,10 @@ import { calPriceDiscount, cn, generateCoverDefault } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import HeartIcon from "./icons/HeartIcon";
+import { Book } from "@/lib/types";
 type Props = {
   className?: string;
-  data: any;
-  // id: number;
-  // title: string;
-  // price: number;
-  // discount_percent: number;
-  // slug: string;
-  // author_name?: string;
-  // cover?: string;
+  data: Book;
 };
 
 const ItemCard = ({ className = "", data }: Props) => {

@@ -3,6 +3,7 @@ import Breadcrumb from "../components/breadcrumb";
 import PaginationButton from "../components/pagination-button";
 import NotFoundBook from "../components/not-found-book";
 import ItemCard from "../components/item-card";
+import { Book } from "@/lib/types";
 
 interface ProductPageProps {
   searchParams?: {
@@ -28,10 +29,10 @@ export default async function Page({ searchParams }: ProductPageProps) {
       <div className="flex w-full flex-col justify-center">
         {books?.length > 0 ? (
           <div className="cards-container">
-            {books?.map((item: any) => {
+            {books?.map((book: Book) => {
               return (
                 <ItemCard
-                  key={item.id}
+                  key={book.id}
                   className={`${
                     books?.length >= 5
                       ? "last:hidden sm:last:flex sm:even:hidden md:last:hidden md:even:flex lg:last:flex"
@@ -39,7 +40,7 @@ export default async function Page({ searchParams }: ProductPageProps) {
                       ? "sm:last:hidden md:sm:last:flex"
                       : ""
                   }`}
-                  data={item}
+                  data={book}
                 />
               );
             })}

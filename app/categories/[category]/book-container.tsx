@@ -1,6 +1,7 @@
 import ItemCard from "@/app/components/item-card";
 import NotFoundBook from "@/app/components/not-found-book";
 import { fetchBooksByCategory } from "@/lib/store/server/books/queries";
+import { Book } from "@/lib/types";
 
 type Props = {
   category: string;
@@ -16,10 +17,10 @@ export default async function BooksContainer({ category }: Props) {
     <div>
       {books?.length > 0 ? (
         <div className="cards-container">
-          {books?.map((item: any) => {
+          {books?.map((book: Book) => {
             return (
               <ItemCard
-                key={item.id}
+                key={book.id}
                 className={`${
                   books?.length >= 5
                     ? "last:hidden sm:last:flex sm:even:hidden md:last:hidden md:even:flex lg:last:flex"
@@ -27,7 +28,7 @@ export default async function BooksContainer({ category }: Props) {
                     ? "sm:last:hidden md:sm:last:flex"
                     : ""
                 }`}
-                data={item}
+                data={book}
               />
             );
           })}

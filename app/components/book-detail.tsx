@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import HeartIcon from "./icons/HeartIcon";
 import NotFoundBook from "./not-found-book";
+import { Category } from "@/lib/types";
 
 type Props = {
   slug: string;
@@ -68,7 +69,7 @@ export default async function BookDetails({ slug }: Props) {
           </div>
           <div>Categories :</div>
           <div className="md:col-span-2 lg:col-span-3">
-            {categories.map((category: any, index: number) => (
+            {categories.map((category: Category, index: number) => (
               <span key={category.title}>
                 {index > 0 ? ", " : ""}
                 <Link
