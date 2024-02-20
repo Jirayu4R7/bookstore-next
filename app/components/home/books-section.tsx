@@ -3,18 +3,20 @@ import CaretDownIcon from "@/app/components/icons/CaretDownIcon";
 import BookRow from "../book-row";
 import { fetchBooksByCategory } from "@/lib/store/server/books/queries";
 import { fetchCategories } from "@/lib/store/server/categories/queries";
+import { LIMIT_SHOW_CATAGORY } from "@/lib/constants";
 
 const BooksSection = async () => {
-  const page = 1;
-  const categories = await fetchCategories({ page });
+  const { data: categories } = await fetchCategories({
+    limit: LIMIT_SHOW_CATAGORY,
+  });
 
   return (
     <div id="books" className="py-14">
       {await Promise.all(
         categories.map(async ({ title, slug }) => {
-          const books = await fetchBooksByCategory({
-            page: 1,
+          const { data: books } = await fetchBooksByCategory({
             categorySlug: slug,
+            limit: 5,
           });
           return (
             <section key={slug} className="mx-auto max-w-6xl px-4 py-6 md:px-8">

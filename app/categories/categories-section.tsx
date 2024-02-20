@@ -5,22 +5,24 @@ import CaretDownIcon from "@/app/components/icons/CaretDownIcon";
 import BookRow from "../components/book-row";
 import { Skeleton } from "../components/ui/skeleton";
 import { Separator } from "../components/ui/separator";
+import { DEFAUL_PAGE_SIZE, LIMIT_SHOW_CATAGORY } from "@/lib/constants";
 
 export default async function CategoriesSection() {
-  const page = 1;
-  const categories = (await fetchCategories({ page })) || [];
+  const { data: categories } = await fetchCategories({
+    limit: LIMIT_SHOW_CATAGORY,
+  });
 
   return (
     <>
       {categories.length > 0 ? (
         await Promise.all(
           categories.map(async ({ title, slug }) => {
-            const books = await fetchBooksByCategory({
-              page: 1,
+            const { data: books } = await fetchBooksByCategory({
               categorySlug: slug,
+              limit: DEFAUL_PAGE_SIZE,
             });
             if (books === null) {
-              return <Skeleton className="w-full h-12" />;
+              return <Skeleton className="h-12 w-full" />;
             }
             return (
               <section key={slug} className="pb-6">
@@ -40,7 +42,7 @@ export default async function CategoriesSection() {
           })
         )
       ) : (
-        <Skeleton className="w-full h-48" />
+        <Skeleton className="h-48 w-full" />
       )}
     </>
   );

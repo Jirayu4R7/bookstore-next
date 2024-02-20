@@ -1,9 +1,8 @@
 "use server";
 import { createClient } from "@/lib/supabase/server";
 import { cookies } from "next/headers";
-// import { Book, BookQueryProps, Books } from "./types";
 import books from "@/lib/data/dum-books.json";
-import { PAGE_SIZE } from "@/lib/constants";
+import { DEFAUL_PAGE_SIZE } from "@/lib/constants";
 import { Book } from "@/lib/types";
 
 export interface GetResponseBooks {
@@ -47,24 +46,36 @@ export const getBooksByCategoryMock = async (slug: string) => {
 export async function fetchBooksByCategory({
   page = 1,
   categorySlug,
+  limit = DEFAUL_PAGE_SIZE,
 }: {
-  page: number;
+  page?: number;
+  limit?: number;
   categorySlug?: string;
-}) {
+}): Promise<GetResponseBooks> {
   const supabase = createServerSupabaseClient();
   try {
+    const offset = (page - 1) * limit;
+    const { count } = await supabase
+      .from("book")
+      .select("title, categories!inner(slug)", { count: "exact" })
+      .eq("categories.slug", categorySlug);
+
     let { data: books, error } = await supabase
       .from("book")
       .select("*, author(id, name),categories!inner(title, slug, id)")
       .eq("categories.slug", categorySlug)
-      .range((page - 1) * PAGE_SIZE, page * PAGE_SIZE - 1);
+      .range(offset, offset + limit - 1);
     if (error) {
       console.log("error fetchbooks : ", error.message);
-      return [];
+      throw new Error("Error fetching books by category: " + categorySlug);
     }
-    return books ? books : [];
+    if (books) {
+      return { data: books, count: count || 0 };
+    } else {
+      return { data: [], count: count || 0 };
+    }
   } catch (error) {
-    return [];
+    return { data: [], count: 0 };
   }
 }
 
