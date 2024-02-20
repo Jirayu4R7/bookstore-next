@@ -4,7 +4,7 @@ import Breadcrumb from "@/app/components/breadcrumb";
 
 type Props = {
   params: { category: string };
-  searchParams: { page: number };
+  searchParams: { page: string };
 };
 
 type MetaProps = {
@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: MetaProps) {
 
 export default async function Page({ params, searchParams }: Props) {
   const { category } = params;
+  const page = searchParams?.page || "1";
 
   return (
     <main className="main-container">
@@ -35,7 +36,7 @@ export default async function Page({ params, searchParams }: Props) {
       <h1 className="font-serif text-2xl font-semibold capitalize">
         {category}
       </h1>
-      <BooksContainer category={category} />
+      <BooksContainer category={category} page={page} />
     </main>
   );
 }

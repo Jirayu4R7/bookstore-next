@@ -1,15 +1,25 @@
 import ItemCard from "@/app/components/item-card";
 import NotFoundBook from "@/app/components/not-found-book";
+import PaginationButton from "@/app/components/pagination-button";
 import { fetchBooksByCategory } from "@/lib/store/server/books/queries";
 import { Book } from "@/lib/types";
 
 type Props = {
   category: string;
+  page: string;
 };
 
-export default async function BooksContainer({ category }: Props) {
-  const page = 1;
-  const books = await fetchBooksByCategory({ page, categorySlug: category });
+const LIMIT_BOOK_IN_CONTAINER = 10;
+
+export default async function BooksContainer({ category, page }: Props) {
+  const currentPage = Number(page);
+  const { data: books, count } = await fetchBooksByCategory({
+    page: currentPage,
+    categorySlug: category,
+    limit: LIMIT_BOOK_IN_CONTAINER,
+  });
+  const totalPages = Math.ceil(count / LIMIT_BOOK_IN_CONTAINER);
+
   if (!books) {
     return <NotFoundBook />;
   }
@@ -36,6 +46,11 @@ export default async function BooksContainer({ category }: Props) {
       ) : (
         <NotFoundBook />
       )}
+      {totalPages > 1 ? (
+        <div className="flex w-full items-center justify-center">
+          <PaginationButton totalPages={totalPages} />
+        </div>
+      ) : null}
     </div>
   );
 }
