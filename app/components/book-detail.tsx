@@ -5,6 +5,7 @@ import Link from "next/link";
 import HeartIcon from "./icons/HeartIcon";
 import NotFoundBook from "./not-found-book";
 import { Category } from "@/lib/types";
+import ReactMarkdown from "react-markdown";
 
 type Props = {
   slug: string;
@@ -43,7 +44,9 @@ export default async function BookDetails({ slug }: Props) {
       </div>
       <div className="md:w-3/5">
         <h1 className="mb-2 text-xl font-bold md:text-2xl">{book.title}</h1>
-        <p className="text-base">{book.description}</p>
+        <div className="prose">
+          <ReactMarkdown>{book?.description}</ReactMarkdown>
+        </div>
         <hr className="my-4 md:my-6" />
         <div className="grid grid-cols-2 gap-y-2 md:grid-cols-3 md:gap-y-4 lg:grid-cols-4">
           <div>Author :</div>

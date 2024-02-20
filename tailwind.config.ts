@@ -19,16 +19,20 @@ const config = {
     },
     extend: {
       fontFamily: {
-        sans: ["var(--font-noto-sans-thai)", "var(--font-mitr)", ...fontFamily.sans],
+        sans: [
+          "var(--font-noto-sans-thai)",
+          "var(--font-mitr)",
+          ...fontFamily.sans,
+        ],
         serif: ["var(--font-mitr)", ...fontFamily.serif],
       },
       colors: {
         skin: {
-          accent: { 
-            // DEFAULT: "#FFBD99", 
-            // dark: "#805C50",   
-            DEFAULT: "#CBDCE3", 
-            dark: "#4A5568" 
+          accent: {
+            // DEFAULT: "#FFBD99",
+            // dark: "#805C50",
+            DEFAULT: "#CBDCE3",
+            dark: "#4A5568",
           },
           base: "#F9FFFF",
           muted: "#EDF4F4",
@@ -90,7 +94,7 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 } satisfies Config;
 
 export default config;
