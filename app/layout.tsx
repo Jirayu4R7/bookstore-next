@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/app/components/footer";
 import NavBar from "@/app/components/navbar";
 import siteMetadata from "@/lib/data/siteMetadata";
+import { Toaster } from "@/app/components/ui/toaster";
 
 const notoSansThai = Noto_Sans_Thai({
   variable: "--font-noto-sans-thai",
@@ -85,6 +86,7 @@ export default function RootLayout({
       <body className={`${notoSansThai.variable} ${mitr.variable}`}>
         <div className="flex min-h-screen flex-col">
           <NavBar />
+          <Toaster />
           {children}
           <Footer />
         </div>

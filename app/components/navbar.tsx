@@ -10,6 +10,7 @@ import MenuIcon from "@/app/components/icons/MenuIcon";
 import CancelIcon from "@/app/components/icons/CancelIcon";
 import SearchDialog from "@/app/components/search-dialog";
 import useScroll from "@/lib/hook/useScroll";
+import UserIcon from "./icons/UserIcon";
 
 const NavBar = () => {
   const [navClassList, setNavClassList] = useState<string[]>([]);
@@ -34,12 +35,12 @@ const NavBar = () => {
 
   return (
     <>
-      <header className={cn("sticky top-0 z-20 bg-skin-base", navClassList)}>
+      <header className={cn("sticky top-0 z-20 bg-skin-base", navClassList.join(" "))}>
         <NavigationMenu.Root
           aria-label="primary"
           className="main-navigation padding-x max-width relative m-auto flex max-w-6xl items-center justify-between py-4"
         >
-          <div className="flex basis-1/3 justify-start md:hidden">
+          <div className="flex justify-start md:hidden md:basis-1/3">
             <button
               type="button"
               title="menu"
@@ -55,13 +56,26 @@ const NavBar = () => {
           <div className="flex basis-1/3 justify-center md:justify-start">
             <AppLogo />
           </div>
-          <div className="flex basis-1/3 justify-end">
-            <NavigationMenu.List className="gap-x-2 text-lg md:gap-x-4">
-              <NavigationMenu.Item className="nav-menu">
-                <SearchDialog />
-              </NavigationMenu.Item>
-            </NavigationMenu.List>
-          </div>
+          {/* <div className="flex basis-1/3 justify-end"> */}
+          <NavigationMenu.List className="flex basis-1/3 gap-x-2 text-lg md:gap-x-4">
+          <NavigationMenu.Item
+              className={`${"hidden md:list-item"} nav-menu`}
+            >
+              <Link
+                href="/account"
+                className="flex h-full items-center gap-x-2 py-1 pl-1 pr-2"
+              >
+                <UserIcon className="stroke-1" />
+                <span className="hidden text-sm font-light md:inline">
+                  Account
+                </span>
+              </Link>
+            </NavigationMenu.Item>
+            <NavigationMenu.Item className="nav-menu">
+              <SearchDialog />
+            </NavigationMenu.Item>
+          </NavigationMenu.List>
+          {/* </div> */}
         </NavigationMenu.Root>
       </header>
       {/* ===== Mobile Navigation ===== */}
@@ -89,7 +103,8 @@ const NavBar = () => {
           <div className="flex flex-col items-center gap-2">
             <p className="font-serif text-2xl font-medium">Book Store</p>
             <p className="text-center opacity-90">
-              Discover your next favorite book <br /> at <span className="font-semibold">Kong Dong.</span>
+              Discover your next favorite book <br /> at{" "}
+              <span className="font-semibold">Kong Dong.</span>
             </p>
           </div>
           <NavigationMenu.Root
@@ -104,6 +119,15 @@ const NavBar = () => {
                   onClick={closeNav}
                 >
                   <span>Home</span>
+                </Link>
+              </NavigationMenu.Item>
+              <NavigationMenu.Item className={`flex w-full flex-col`}>
+                <Link
+                  href="/account"
+                  className={`flex items-center gap-x-2 px-2 py-1 text-xl`}
+                  onClick={closeNav}
+                >
+                  <span>Account</span>
                 </Link>
               </NavigationMenu.Item>
               <NavigationMenu.Item className={`flex w-full flex-col`}>
