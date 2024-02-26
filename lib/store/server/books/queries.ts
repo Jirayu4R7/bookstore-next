@@ -3,10 +3,15 @@ import { createClient } from "@/lib/supabase/server";
 import { cookies } from "next/headers";
 import books from "@/lib/data/dum-books.json";
 import { DEFAUL_PAGE_SIZE } from "@/lib/constants";
-import { Book } from "@/lib/types";
+import { Book, WishlistBook } from "@/lib/types";
 
 export interface GetResponseBooks {
   data: Book[];
+  count: number;
+}
+
+export interface GetResponseWishlist {
+  data: WishlistBook[];
   count: number;
 }
 
@@ -109,6 +114,48 @@ export async function fetchBooks({
   } catch (error) {
     return { data: [], count: 0 };
   }
+}
+
+export async function fetchMyBooks({
+  limit = 10,
+  pageNum = 1,
+  searchTerm,
+}: BookQueryProps): Promise<GetResponseWishlist> {
+  const supabase = createServerSupabaseClient();
+  // console.log(searchTerm);
+  try {
+    const offset = (pageNum - 1) * limit;
+    const { count } = await supabase
+      .from("user_book")
+      .select("*", { count: "exact" })
+      .eq("user_id", searchTerm);
+
+    let { data: books, error } = await supabase
+      .from("user_book")
+      .select("*, book(*, author(id, name))")
+      .eq("user_id", searchTerm)
+      .range(offset, offset + limit - 1);
+    if (error) {
+      console.log("error fetchbooks : ", error.message);
+      throw new Error("Error fetching books");
+    }
+
+    if (books) {
+      // console.log("books", books);
+      return { data: books, count: count || 0 };
+    } else {
+      return { data: [], count: count || 0 };
+    }
+  } catch (error) {
+    return { data: [], count: 0 };
+  }
+}
+
+export async function addToWishlist(id: number) {
+  const cookieStore = cookies();
+  let session = cookieStore.get("session");
+  console.log("session", session);
+  // console.log("cookieStore", cookieStore);
 }
 
 export async function fetchBook(slug: string) {

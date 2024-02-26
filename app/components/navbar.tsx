@@ -11,6 +11,7 @@ import CancelIcon from "@/app/components/icons/CancelIcon";
 import SearchDialog from "@/app/components/search-dialog";
 import useScroll from "@/lib/hook/useScroll";
 import UserIcon from "./icons/UserIcon";
+import HeartIcon from "./icons/HeartIcon";
 
 const NavBar = () => {
   const [navClassList, setNavClassList] = useState<string[]>([]);
@@ -35,7 +36,9 @@ const NavBar = () => {
 
   return (
     <>
-      <header className={cn("sticky top-0 z-20 bg-skin-base", navClassList.join(" "))}>
+      <header
+        className={cn("sticky top-0 z-20 bg-skin-base", navClassList.join(" "))}
+      >
         <NavigationMenu.Root
           aria-label="primary"
           className="main-navigation padding-x max-width relative m-auto flex max-w-6xl items-center justify-between py-4"
@@ -58,7 +61,7 @@ const NavBar = () => {
           </div>
           {/* <div className="flex basis-1/3 justify-end"> */}
           <NavigationMenu.List className="flex basis-1/3 gap-x-2 text-lg md:gap-x-4">
-          <NavigationMenu.Item
+            <NavigationMenu.Item
               className={`${"hidden md:list-item"} nav-menu`}
             >
               <Link
@@ -68,6 +71,19 @@ const NavBar = () => {
                 <UserIcon className="stroke-1" />
                 <span className="hidden text-sm font-light md:inline">
                   Account
+                </span>
+              </Link>
+            </NavigationMenu.Item>
+            <NavigationMenu.Item
+              className={`${"hidden md:list-item"} nav-menu`}
+            >
+              <Link
+                href="/wishlist"
+                className="flex h-full items-center gap-x-2 py-1 pl-1 pr-2"
+              >
+                <HeartIcon className="stroke-1" />
+                <span className="hidden text-sm font-light md:inline">
+                  Wishlist
                 </span>
               </Link>
             </NavigationMenu.Item>
@@ -128,6 +144,15 @@ const NavBar = () => {
                   onClick={closeNav}
                 >
                   <span>Account</span>
+                </Link>
+              </NavigationMenu.Item>
+              <NavigationMenu.Item className={`flex w-full flex-col`}>
+                <Link
+                  href="/wishlist"
+                  className={`flex items-center gap-x-2 px-2 py-1 text-xl`}
+                  onClick={closeNav}
+                >
+                  <span>Wishlist</span>
                 </Link>
               </NavigationMenu.Item>
               <NavigationMenu.Item className={`flex w-full flex-col`}>

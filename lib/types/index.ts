@@ -22,3 +22,7 @@ export interface Author {
     categories?: Category[];
   }
   
+  export interface WishlistBook {
+    id: number;
+    book: Book
+  }
