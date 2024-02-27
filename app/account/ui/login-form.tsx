@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import {
   Form,
   FormField,
@@ -33,6 +34,7 @@ function SubmitButton() {
 }
 
 export default function LoginForm() {
+  const router = useRouter();
   const ref = useRef(null);
   const { toast } = useToast();
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -55,7 +57,9 @@ export default function LoginForm() {
       if (result.success) {
         toast({
           description: "Login successfully.",
+          duration: 1000,
         });
+        router.push("/");
       } else {
         toast({
           variant: "destructive",

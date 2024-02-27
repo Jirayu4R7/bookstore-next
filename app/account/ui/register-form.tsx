@@ -75,7 +75,6 @@ export default function RegisterForm() {
         {errorMessage && (
           <span className="error inline-block align-text-bottom">
             <AlertIcon className="mr-1 stroke-2 align-middle" />
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
           </span>
         )}
 
