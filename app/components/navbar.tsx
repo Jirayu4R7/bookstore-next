@@ -61,19 +61,10 @@ const NavBar = () => {
           </div>
           {/* <div className="flex basis-1/3 justify-end"> */}
           <NavigationMenu.List className="flex basis-1/3 gap-x-2 text-lg md:gap-x-4">
-            <NavigationMenu.Item
-              className={`${"hidden md:list-item"} nav-menu`}
-            >
-              <Link
-                href="/account"
-                className="flex h-full items-center gap-x-2 py-1 pl-1 pr-2"
-              >
-                <UserIcon className="stroke-1" />
-                <span className="hidden text-sm font-light md:inline">
-                  Account
-                </span>
-              </Link>
+            <NavigationMenu.Item className="nav-menu">
+              <SearchDialog />
             </NavigationMenu.Item>
+          
             <NavigationMenu.Item
               className={`${"hidden md:list-item"} nav-menu`}
             >
@@ -87,8 +78,19 @@ const NavBar = () => {
                 </span>
               </Link>
             </NavigationMenu.Item>
-            <NavigationMenu.Item className="nav-menu">
-              <SearchDialog />
+
+            <NavigationMenu.Item
+              className={`${"hidden md:list-item"} nav-menu`}
+            >
+              <Link
+                href="/account"
+                className="flex h-full items-center gap-x-2 py-1 pl-1 pr-2"
+              >
+                <UserIcon className="stroke-1" />
+                <span className="hidden text-sm font-light md:inline">
+                  Account
+                </span>
+              </Link>
             </NavigationMenu.Item>
           </NavigationMenu.List>
           {/* </div> */}
