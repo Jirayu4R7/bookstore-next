@@ -4,6 +4,8 @@ import { cookies } from "next/headers";
 import books from "@/lib/data/dum-books.json";
 import { DEFAUL_PAGE_SIZE } from "@/lib/constants";
 import { Book, WishlistBook } from "@/lib/types";
+import { decrypt } from "../account/actions";
+import { revalidatePath } from "next/cache";
 
 export interface GetResponseBooks {
   data: Book[];
@@ -132,7 +134,7 @@ export async function fetchMyBooks({
 
     let { data: books, error } = await supabase
       .from("user_book")
-      .select("*, book(*, author(id, name))")
+      .select("*, book(id, cover, slug, price, discount_percent, title, link_to_buy)")
       .eq("user_id", searchTerm)
       .range(offset, offset + limit - 1);
     if (error) {
@@ -151,11 +153,67 @@ export async function fetchMyBooks({
   }
 }
 
-export async function addToWishlist(id: number) {
-  const cookieStore = cookies();
-  let session = cookieStore.get("session");
-  console.log("session", session);
+export async function addToWishlist(bookId: number) {
+  try {
+    const supabase = createServerSupabaseClient();
+    const cookieStore = cookies();
+    let session = cookieStore.get("session");
+    if (session) {
+      let { user } = await decrypt(session.value);
+      const { error } = await supabase
+        .from("user_book")
+        .insert([{ user_id: user.id, book_id: bookId }]);
+      if (error) {
+        console.log("error addToWishlist : ", error.message);
+        throw new Error("Error addToWishlist: " + error.message);
+      } else {
+        revalidatePath("/wishlist");
+        return { success: true, message: "Add book to wishlist successfully." };
+      }
+    } else {
+      return { success: false, message: "Please login." };
+    }
+  } catch (error) {
+    console.error(error);
+    return { success: false, message: "Something went wrong." };
+  }
   // console.log("cookieStore", cookieStore);
+}
+
+export async function removeBookFromWishlist(bookId: number) {
+  try {
+    const supabase = createServerSupabaseClient();
+    const cookieStore = cookies();
+    let session = cookieStore.get("session");
+
+    if (session) {
+      let { user } = await decrypt(session.value);
+      const { data, error } = await supabase
+        .from("user_book")
+        .delete()
+        .eq("user_id", user.id)
+        .eq("book_id", bookId)
+        .select();
+
+      if (error) {
+        console.error("Error removing book from wishlist:", error.message);
+        throw new Error("Error removing book from wishlist");
+      } else if (data.length === 0) {
+        return { success: false, message: "Book not found in wishlist." };
+      } else {
+        revalidatePath("/wishlist");
+        return {
+          success: true,
+          message: "Book removed from wishlist.",
+        };
+      }
+    } else {
+      return { success: false, message: "Please login." };
+    }
+  } catch (error) {
+    console.error("Error removing book from wishlist:", error);
+    return { success: false, message: "Something went wrong." };
+  }
 }
 
 export async function fetchBook(slug: string) {

@@ -6,6 +6,7 @@ import ItemCard from "@/app/components/item-card";
 import { getToken, fetchInfoMe } from "@/lib/store/server/account/actions";
 import Link from "next/link";
 import { WishlistBook } from "@/lib/types";
+import WishlistContainer from "./ui/wishlist-container";
 
 interface PageProps {
   searchParams?: {
@@ -46,32 +47,37 @@ export default async function Page({ searchParams }: PageProps) {
 
   return (
     <div className="main-container">
+      <WishlistContainer wishlist={books} />
       <Breadcrumb customTitle="My Wishlist" />
       <div className="flex w-full flex-col justify-center">
         {books?.length > 0 ? (
-          <div className="cards-container">
-            {books?.map(({ book }: WishlistBook) => {
-              return (
-                <ItemCard
-                  key={book.id}
-                  className={`${
-                    books?.length >= 5
-                      ? "last:hidden sm:last:flex sm:even:hidden md:last:hidden md:even:flex lg:last:flex"
-                      : books?.length === 4
-                      ? "sm:last:hidden md:sm:last:flex"
-                      : ""
-                  }`}
-                  data={book}
-                />
-              );
-            })}
-          </div>
+          <>
+            <div className="cards-container">
+              {books?.map(({ book }: WishlistBook) => {
+                return (
+                  <ItemCard
+                    key={book.id}
+                    className={`${
+                      books?.length >= 5
+                        ? "last:hidden sm:last:flex sm:even:hidden md:last:hidden md:even:flex lg:last:flex"
+                        : books?.length === 4
+                        ? "sm:last:hidden md:sm:last:flex"
+                        : ""
+                    }`}
+                    data={book}
+                  />
+                );
+              })}
+            </div>
+            {totalPages > 1 ? (
+              <div className="flex w-full items-center justify-center">
+                <PaginationButton totalPages={totalPages} />
+              </div>
+            ) : null}
+          </>
         ) : (
           <NotFoundBook />
         )}
-        <div className="flex w-full items-center justify-center">
-          <PaginationButton totalPages={totalPages} />
-        </div>
       </div>
     </div>
   );

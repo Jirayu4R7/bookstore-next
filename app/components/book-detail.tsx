@@ -2,10 +2,10 @@ import { fetchBook } from "@/lib/store/server/books/queries";
 import { calPriceDiscount, generateCoverDefault } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import HeartIcon from "./icons/HeartIcon";
 import NotFoundBook from "./not-found-book";
 import { Category } from "@/lib/types";
 import ReactMarkdown from "react-markdown";
+import WishlistButton from "./wishlist-button";
 
 type Props = {
   slug: string;
@@ -24,7 +24,7 @@ export default async function BookDetails({ slug }: Props) {
   }
   const book = data;
   const categories = data.categories;
-  const hasWishlisted = false;
+  // const hasWishlisted = false;
   return (
     <div className="mb-12 flex flex-col gap-6 md:flex-row md:gap-10 lg:gap-16">
       <div className="image-wrapper mx-auto w-full max-w-[30rem] rounded bg-skin-muted p-8 md:w-2/5 md:max-w-none md:self-start md:p-8 lg:p-10">
@@ -94,20 +94,7 @@ export default async function BookDetails({ slug }: Props) {
             Buy now
           </Link>
 
-          <button
-            disabled
-            type="button"
-            className="outline-btn-color flex w-full items-center justify-center gap-x-4 rounded border-2 py-2 text-center text-lg font-medium"
-          >
-            <>
-              <HeartIcon
-                className={`stroke-2 ${
-                  hasWishlisted ? "fill-skin-accent stroke-skin-accent" : ""
-                }`}
-              />
-              {hasWishlisted ? "Wishlisted" : "Add To Wishlist"}
-            </>
-          </button>
+          <WishlistButton id={book.id} variant="full" />
         </div>
       </div>
     </div>

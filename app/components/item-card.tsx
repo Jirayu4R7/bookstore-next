@@ -1,8 +1,8 @@
 import { calPriceDiscount, cn, generateCoverDefault } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import HeartIcon from "./icons/HeartIcon";
 import { Book } from "@/lib/types";
+import WishlistButton from "@/app/components/wishlist-button";
 type Props = {
   className?: string;
   data: Book;
@@ -52,7 +52,6 @@ const ItemCard = ({ className = "", data }: Props) => {
             <span> บาท </span>
           </div>
         </div>
-        {/* ฉันต้องการแสดง ปุ่ม อยู่ตำแหน่งล่างเหมือนกัน */}
 
         <div className="buttons flex gap-x-2">
           <button
@@ -63,20 +62,7 @@ const ItemCard = ({ className = "", data }: Props) => {
               Buy now
             </Link>
           </button>
-          <button
-            type="button"
-            disabled
-            className="outline-btn-color basis-1/4 rounded p-1"
-            title="Add To Wishlist"
-          >
-            <HeartIcon
-              className={`${
-                false
-                  ? "fill-skin-accent !stroke-skin-accent"
-                  : "!stroke-skin-dark"
-              }`}
-            />
-          </button>
+          <WishlistButton id={data?.id || 0} variant="mini" />
         </div>
       </div>
     </article>

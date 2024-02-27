@@ -84,7 +84,7 @@ export async function login(formData: { email: string; password: string }) {
     const supabase = createServerSupabaseClient();
     let { data: user, error } = await supabase
       .from("user")
-      .select("fullname,email,password")
+      .select("fullname,email,password,id")
       .eq("email", _user.email)
       .single();
 
@@ -99,6 +99,7 @@ export async function login(formData: { email: string; password: string }) {
       }
       // Create the session
       const userToJWT = {
+        id: user.id,
         fullname: user.fullname,
         email: user.email,
       };
@@ -129,7 +130,7 @@ export async function fetchInfoMe(token: string) {
     if (email) {
       const { data: user, error } = await supabase
         .from("user")
-        .select("fullname,email")
+        .select("fullname,email,id")
         .eq("email", email)
         .single();
       if (error) {

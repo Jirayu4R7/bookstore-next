@@ -23,6 +23,6 @@ export interface Author {
   }
   
   export interface WishlistBook {
-    id: number;
+    // id: number;
     book: Book
   }
